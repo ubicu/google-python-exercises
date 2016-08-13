@@ -52,20 +52,25 @@ def normalize(s):
     s2  = [ss for ss in s1 if ss in keepChars]
     s3  = "".join(s2)
     return s3
+    
+# Helper function - get dictionary out of string of words   
+def getDictionary(s):
+    
+    words = s.split()
+    dicts = {}
+    for word in words:
+        if word in dicts:
+            dicts[word] += 1
+        else:
+            dicts[word] = 1
+    return dicts
 
 
 def print_words(filename):
     
     with open(filename, 'r') as f:
         s=normalize(f.read())
-        
-        words = s.split()
-        dicts = {}
-        for word in words:
-            if word in dicts:
-                dicts[word] += 1
-            else:
-                dicts[word] = 1
+        dicts=getDictionary(s)
         
         entries = sorted(dicts.items())
         for entry in entries:
@@ -78,15 +83,8 @@ def print_top(filename):
     
     with open(filename, 'r') as f:
         s=normalize(f.read())
-        
-        words = s.split()
-        dicts = {}
-        for word in words:
-            if word in dicts:
-                dicts[word] += 1
-            else:
-                dicts[word] = 1
-        
+        dicts=getDictionary(s)
+
         entries = sorted(dicts.items(), key = Value, reverse=True)
         i=0
         while (i < 20) and (i < len(entries)):
