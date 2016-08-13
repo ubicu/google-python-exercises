@@ -37,6 +37,43 @@ print_words() and print_top().
 
 """
 
+# Convert string input into a normalized form, i.e.,
+# in lower case, no special characters that will
+# interfere with word count
+def normalize(s):
+    
+    # Characters to keep
+    keepChars = {'a','b','c','d','e','f','g','h','i','j','k','l',
+        'm','n','o','p','q','r','s','t','u','v','w','x','y','z',
+        ' ',"'"}
+    
+    s1a = s.lower()
+    s1  = s1a.replace("\n"," ")
+    s2  = [ss for ss in s1 if ss in keepChars]
+    s3  = "".join(s2)
+    return s3
+
+
+def print_words(filename):
+    
+    with open(filename, 'r') as f:
+        s=normalize(f.read())
+        
+        words = s.split()
+        dicts = {}
+        for word in words:
+            if word in dicts:
+                dicts[word] += 1
+            else:
+                dicts[word] = 1
+        
+        entries = sorted(dicts.items())
+        for entry in entries:
+            print("%s %d" %(entry[0], entry[1]))
+
+
+
+
 import sys
 
 # +++your code here+++
