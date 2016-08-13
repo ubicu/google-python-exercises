@@ -69,8 +69,30 @@ def print_words(filename):
         
         entries = sorted(dicts.items())
         for entry in entries:
-            print("%s %d" %(entry[0], entry[1]))
+            print("%s %d"%(entry[0],entry[1]))
+            
+def Value(s):
+    return s[-1]
 
+def print_top(filename):
+    
+    with open(filename, 'r') as f:
+        s=normalize(f.read())
+        
+        words = s.split()
+        dicts = {}
+        for word in words:
+            if word in dicts:
+                dicts[word] += 1
+            else:
+                dicts[word] = 1
+        
+        entries = sorted(dicts.items(), key = Value, reverse=True)
+        i=0
+        while (i < 20) and (i < len(entries)):
+            entry = entries[i]
+            print("%s %d"%(entry[0],entry[1]))
+            i = i+1
 
 
 
