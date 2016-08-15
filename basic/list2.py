@@ -18,19 +18,31 @@ def remove_adjacent(nums):
 	if len(nums) == 0:
 		return []
 		
+	# Get indices where the change occurs
+	# For example, nums = [1, 2, 2, 3]
+	# boundary = [0,2]
 	boundary = []
 	for i in range(len(nums)-1):
 		if nums[i]!=nums[i+1]:
 			boundary.append(i)
 
-	outS = []
-	outS.append(nums[:boundary[0]+1])
 
-	for i in range(len(boundary)-1):
+    # Get common characters inside boundary
+    # and put them into separate lists
+    # For example, nums = [1, 2, 2, 3]
+    # boundary = [0,2]
+    # s1 = nums[0:1]
+    # s2 = nums[1:3]
+    # s3 = nums[3:]
+	outS = []
+	outS.append(nums[:boundary[0]+1]) # s1 = nums[0:1]
+
+	for i in range(len(boundary)-1): # s2 = nums[1:3]
 		outS.append(nums[boundary[i]+1:boundary[i+1]+1])
     
-
-	outS.append(nums[boundary[-1]+1:])
+	outS.append(nums[boundary[-1]+1:]) # s3 = nums[3:]
+	
+	# Get first elements of each list, e.g., s1[0],s2[0],s3[0]
 	output = [outS[i][0] for i in range(len(outS))]
 	return output
 
