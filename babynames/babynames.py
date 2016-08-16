@@ -49,6 +49,9 @@ def extract_names(filename):
 	# get year
 	m = re.search(r'Popularity in (\d\d\d\d)',contents)
 	print(m.group(1))
+	
+	m = re.findall(r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>',contents)
+	print(m)
   
   
   return
