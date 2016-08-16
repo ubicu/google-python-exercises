@@ -41,7 +41,7 @@ def extract_names(filename):
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
   # +++your code here+++
-  print('Analyzing '+filename+' ...')
+  # print('Analyzing '+filename+' ...')
   
   with open(filename, 'r') as f:
 	contents = f.read()
@@ -102,7 +102,16 @@ def main():
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
-  extract_names(args[0])
+  for fname in args:
+  
+    out  = extract_names(fname)
+    out1 = '\n'.join(out)
+    if summary:
+	  with open(fname+'.summary','w') as f:
+		f.write(out1)
+		
+    else:
+	  print(out1)
   
 if __name__ == '__main__':
   main()
