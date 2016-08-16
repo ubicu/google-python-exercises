@@ -73,3 +73,33 @@ Find(r':\w+','blah :kitten123%&fd*^ :1    2     3 blah blah')
 # Example 17
 Find(r':\S+','blah :kitten123%&fd*^ :1    2     3 blah blah')
 
+# Example 18
+Find(r'\w+@\w+','My email nick.p@gmail.com blah @')
+
+# Example 19
+Find(r'[\w.]+@[\w.]+','My email nick.p@gmail.com blah @') # Set of characters allowed, inside []
+
+# Example 20
+Find(r'[\w.]+@[\w.]+','My email .nick.p@gmail.com blah @') 
+
+# Example 21
+Find(r'\w[\w.]+@[\w.]+','My email .nick.p@gmail.com blah @') 
+
+# Example 22 - Get the username and hostname
+m = re.search(r'(\w[\w.]+)@([\w.]+)', 'My email .nick.p@gmail.com blah @')
+print(m)
+print(m.group())
+print(m.group(1))
+print(m.group(2))
+
+# Example 23
+out = re.findall(r'\w[\w.]+@[\w.]+','My email .nick.p@gmail.com blah @ test@email.com')
+print(out)
+
+# Example 24
+out = re.findall(r'(\w[\w.]+)@([\w.]+)','My email .nick.p@gmail.com blah @ test@email.com')
+print(out)
+
+# Example 25
+out = re.findall(r'(\w[\w.]+)@([\w.]+)','My email .niCk.p@gmail.com blah @ test@email.com', re.IGNORECASE)
+print(out)
