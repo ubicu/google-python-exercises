@@ -48,13 +48,39 @@ def extract_names(filename):
 	
 	# get year
 	m = re.search(r'Popularity in (\d\d\d\d)',contents)
-	print(m.group(1))
+	year = m.group(1)
+	# print(m.group(1))
 	
+	# get rank, male-name, female-name
 	m = re.findall(r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>',contents)
-	print(m)
-  
-  
-  return
+	# print(m)
+	
+	dicts = {}
+	for mi in m:
+	  rank  = mi[0]
+	  mname = mi[1]
+	  fname = mi[2]
+	  
+	  # Check male-name
+	  if mname in dicts:
+	    if dicts[mname] > rank:
+		  dicts[mname] = rank
+	  else:
+	    dicts[mname] = rank
+		
+	  # Check female-name
+	  if fname in dicts:
+	    if dicts[fname] > rank:
+		  dicts[fname] = rank
+	  else:
+	    dicts[fname] = rank
+		
+	out = sorted(dicts.items())
+	outS = [entry[0] + " " +entry[1] for entry in out]
+	outS = [year] + outS
+	# print(outS)
+		
+	return outS
 
 
 def main():
