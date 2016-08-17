@@ -3,10 +3,13 @@
 import sys
  
 def Cat(filename):
-  with open(filename, 'r') as f:
-    text = f.read()
-    print('---'+filename)
-    print(text)
+  try:
+    with open(filename, 'r') as f:
+      text = f.read()
+      print('---'+filename)
+      print(text)
+  except IOError:
+    print("IOError: "+filename +"\n")
  
 def main():
   args = sys.argv[1:]
