@@ -68,8 +68,6 @@ def main():
     print "error: must specify one or more dirs"
     sys.exit(1)
 	
-  print(args)
-
   # +++your code here+++
   # Call your functions
   specialfiles = getspecialfiles(args[0])
@@ -83,9 +81,10 @@ def main():
       shutil.copy(file, os.path.join(todir, fname))
 	  
   elif tozip != '':
-    pass
+    pass # zip command line not available in Windows
+    
   else:
-    pass
+    print('\n'.join(specialfiles))
   
   
   
