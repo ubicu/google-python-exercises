@@ -35,7 +35,8 @@ def getspecialfiles(dir):
 	  path = os.path.join(dir,filename)
 	  specialfiles.append(os.path.abspath(path))
 
-  print(specialfiles)
+  # print(specialfiles)
+  return specialfiles
 	
 
 
@@ -66,10 +67,27 @@ def main():
   if len(args) == 0:
     print "error: must specify one or more dirs"
     sys.exit(1)
+	
+  print(args)
 
   # +++your code here+++
   # Call your functions
-  getspecialfiles(args[0])
+  specialfiles = getspecialfiles(args[0])
+  
+  if todir != '':
+    if not os.path.exists(todir):
+      os.mkdir(todir)
+  
+    for file in specialfiles:
+      fname = os.path.basename(file)
+      shutil.copy(file, os.path.join(todir, fname))
+	  
+  elif tozip != '':
+    pass
+  else:
+    pass
+  
+  
   
 if __name__ == "__main__":
   main()
