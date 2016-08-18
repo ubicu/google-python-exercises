@@ -26,6 +26,23 @@ def read_urls(filename):
   increasing order."""
   # +++your code here+++
   
+  with open(filename, 'r') as f:
+    contents = f.read()
+    m = re.findall(r'GET\s(\S+puzzle\S+)', contents)
+    
+    dicts = {}
+    for mi in m:
+      basename = os.path.basename(mi)
+      if basename not in dicts:
+        dicts[basename] = "http://code.google.com"+mi
+		
+    sortedItems = sorted(dicts.items())
+    out = [sortedItem[1] for sortedItem in sortedItems]
+    return out
+    
+	
+    
+  
 
 def download_images(img_urls, dest_dir):
   """Given the urls already in the correct order, downloads
