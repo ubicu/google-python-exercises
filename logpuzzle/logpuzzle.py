@@ -18,6 +18,14 @@ Here's what a puzzle url looks like:
 10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
 """
 
+# From solution folder
+def url_sort_key(url):
+  """Used to order the urls in increasing order by 2nd word if present."""
+  match = re.search(r'-(\w+)-(\w+)\.\w+', url)
+  if match:
+    return match.group(2)
+  else:
+    return url
 
 def read_urls(filename):
   """Returns a list of the puzzle urls from the given log file,
@@ -36,9 +44,9 @@ def read_urls(filename):
       if basename not in dicts:
         dicts[basename] = "http://code.google.com"+mi
 		
-    sortedItems = sorted(dicts.items())
-    out = [sortedItem[1] for sortedItem in sortedItems]
-    return out
+    sortedItems = sorted(dicts.values(), key = url_sort_key)
+    # out = [sortedItem[1] for sortedItem in sortedItems]
+    return sortedItems
     
 	
     
